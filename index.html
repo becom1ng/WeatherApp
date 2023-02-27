@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:,"> <!-- Fix console favicon.ico 404 -->
+    <title>JavaScript Course</title>
+</head>
+<body>
+    <header><h1>JavaScript Course</h1></header>
+
+    <div class="main">
+        <div id="editTeacher">
+            <form>
+                <label>
+                    First Name:
+                    <input id="firstName" name="firstName" />
+                </label>
+                <label>
+                    Last Name:
+                    <input id="lastName" name="lastName" />
+                </label>
+                <button onclick="saveTeacher();event.preventDefault();">Save</button>
+            </form>
+        </div>
+        <div id="viewTeacher">
+            <h2 id="teacherName">...</h2>
+            <ul id="teacherLanguages">
+                <li>C#</li>
+            </ul>
+            <div>
+                <label>
+                    Add Skill:
+                    <input id="skill" name="skill" />
+                </label>
+                <button onclick="addSkill()">Add</button>
+                <button onclick="resetSkills()">Reset</button>
+            </div>
+            <div>
+                <a href="#" onclick="toggleEdit()">Edit</a>
+            </div>
+        </div>
+        
+
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
