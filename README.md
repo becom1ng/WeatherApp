@@ -1,1 +1,1 @@
-# JavaScript Course
+# Single Page Weather App
