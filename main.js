@@ -20,3 +20,15 @@ function displayWeather(weather) {
 }
 
 displayWeather(weather);
+
+// fetch takes in an endpoint / url
+function fetchWeather(zip) {
+  var fetchURL = `https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=fd7bb1c5117b8de8488094b4094e66e4&units=imperial`
+  console.log(fetchURL);
+  
+  fetch(fetchURL)
+    .then(response => response.json())
+    .then(data => console.log(data));
+}
+
+fetchWeather(63119);
