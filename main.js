@@ -98,6 +98,13 @@ var testweather = {
   "cod": 200
 }
 
+//function getCardinalDirection(angle) {
+//  const directions = ['↑ N', '↗ NE', '→ E', '↘ SE', '↓ S', '↙ SW', '← W', '↖ NW'];
+//  return directions[Math.round(angle / 45) % 8];
+//}
+
+//console.log(getCardinalDirection(testweather.wind.deg))
+
 // Destructuring
 //const { main: { temp } } = testweather
 //console.log(temp);
@@ -108,11 +115,23 @@ var testweather = {
 
 function displayWeather(weather) {
 var elemTemp = document.getElementById('temperature')
-var elemHConditions = document.getElementById('conditions')
+var elemFeelsLike = document.getElementById('feelsLike')
+var elemConditions = document.getElementById('conditions')
 var elemWind = document.getElementById('wind')
-elemTemp.innerText = weather.main.temp;
-elemHumidity.innerText = weather.main.humidity;
-elemWind.innerText = weather.wind.speed;
+var elemWeatherIcon = document.getElementById('weatherIcon')
+
+  function getCardinalDirection(angle) {
+    const directions = ['N ↑', 'NE ↗', 'E →', 'SE ↘', 'S ↓', 'SW ↙', 'W ←', 'NW ↖'];
+    return directions[Math.round(angle / 45) % 8];
+  }
+
+  console.log(getCardinalDirection(weather.wind.deg))
+
+elemTemp.innerText = Math.round(weather.main.temp);
+elemFeelsLike.innerText = Math.round(weather.main.feels_like);
+elemConditions.innerText = weather.weather[0].main;
+elemWeatherIcon.innerHTML = `<img src="https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png" height="120"></img>`;
+elemWind.innerText = Math.round(weather.wind.speed) + " " + getCardinalDirection(weather.wind.deg);
 }
 
 displayWeather(testweather);

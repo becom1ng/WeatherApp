@@ -11,11 +11,13 @@
     <title>Single Page Weather App</title>
 </head>
 <body>
+
     <!-- Header -->
-    <section class="bg-dark text-light py-3">
+
+    <section class="bg-dark text-light p-3">
         <div class="container">
             <div class="d-md-flex justify-content-between align-items-center">
-                <h2 class="fw-semibold">Weather</h2>
+                <h1 class="fw-semibold">Weather</h1>
 
                 <div class="input-group weather-input">
                     <input type="text" class="form-control" placeholder="Enter Zip or City and State">
@@ -27,21 +29,56 @@
 
     <!-- Weather Display -->
 
-    <section class="bg-dark-subtle text-dark p-3">
+<!--    <section class="bg-dark-subtle text-dark p-3">
         <div class="container">
             <div class="row main text-sm-start" id="weatherDisplay">
                 <div class="col-md text-center mb-3">
                     <h3 class="fw-semibold">Temperature<br></h3>
                     <h1 class="fw-bold mb-0"><span id="temperature">--</span></h1><br>
-                    <h4>Feels Like: <span id="tempFeel">--</span></h4>
+                    Feels Like: <span id="feelsLike">--</span>
                 </div>
                 <div class="col-md text-center">
-                    <img src="https://openweathermap.org/img/wn/10d@2x.png" height="100"></img>
-                    <h2 class="fw-bold"><span id="conditions">--</span></h2>
+                    <h3 class="fw-semibold">Conditions<br></h3>
+                    <span id="weatherIcon">--</span>
+                    <h3 class="fw-semibold"><span id="conditions">--</span></h3>
                 </div>
                 <div class="col-md text-center">
                     <h3 class="fw-semibold">Wind<br></h3>
-                    <h2 class="fw-bold"><span id="wind">--</span></h2>
+                    <h3 class="fw-bold"><span id="wind">--</span></h3>
+                </div>
+            </div>
+        </div>
+    </section>
+-->
+
+    <section class="p-3 bg-dark-subtle">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md">
+                    <div class="card bg-dark text-light border-light">                    
+                        <h2 class="card-header mb-0">Temperature</h2>
+                        <div class="card-body text-center">
+                            <h1 class="card-text fw-bold mb-0"><span id="temperature">--</span></h1><br>
+                            Feels Like: <span id="feelsLike">--</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="card bg-secondary text-light border-light">                      
+                        <h2 class="card-header mb-0">Conditions<br></h2>
+                        <div class="card-body text-center">
+                            <span class ="m-0" id="weatherIcon">--</span>
+                            <span id="conditions">--</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="card bg-dark text-light border-light">
+                        <h2 class="card-header mb-3">Wind<br></h2>
+                        <div class="card-body text-center">
+                            <h3 class="fw-bold"><span id="wind">--</span></h3>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
