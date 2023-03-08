@@ -1,4 +1,4 @@
-// Get default location
+// <!-- Get default location
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition, showError);
@@ -9,7 +9,12 @@ function getLocation() {
 
 function showPosition(position) {
   console.log('Latitude: ' + position.coords.latitude + ' Longitude: ' + position.coords.longitude);
-  console.log(`Default fetchURL =  https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=fd7bb1c5117b8de8488094b4094e66e4&units=imperial`);
+  var fetchURL = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=fd7bb1c5117b8de8488094b4094e66e4&units=imperial`
+  console.log(fetchURL);
+  
+//  fetch(fetchURL)
+//    .then(response => response.json())
+//    .then(data => console.log(data));
 }
 
 function showError(error) {
@@ -29,7 +34,9 @@ function showError(error) {
   }
 } 
 
-getLocation();
+//getLocation();
+
+// End default location -->
 
 // fetch takes in an endpoint / url
 function fetchWeather(zip) {
@@ -48,19 +55,60 @@ function fetchWeather(zip) {
 
 // Sample weather JSON - PLACEHOLDER TO GENERATE DEFAULT VALUES
 var testweather = {
+  "coord": {
+    "lon": -90.3283,
+    "lat": 38.6007
+  },
+  "weather": [
+    {
+      "id": 800,
+      "main": "Clear",
+      "description": "clear sky",
+      "icon": "01n"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 56.32,
+    "feels_like": 54.7,
+    "temp_min": 52.83,
+    "temp_max": 58.42,
+    "pressure": 1006,
+    "humidity": 65
+  },
+  "visibility": 10000,
   "wind": {
-     "speed": 0.47,
-     "deg": 107.538
-   },
-   "main": {
-     "temp": 59,
-     "humidity": 43
-   }
+    "speed": 16.11,
+    "deg": 100
+  },
+  "clouds": {
+    "all": 0
+  },
+  "dt": 1677630197,
+  "sys": {
+    "type": 2,
+    "id": 2008299,
+    "country": "US",
+    "sunrise": 1677587728,
+    "sunset": 1677628359
+  },
+  "timezone": -21600,
+  "id": 4397042,
+  "name": "Maplewood",
+  "cod": 200
 }
+
+// Destructuring
+//const { main: { temp } } = testweather
+//console.log(temp);
+//
+// Array of objects
+// console.log(testweather[1].temp);
+
 
 function displayWeather(weather) {
 var elemTemp = document.getElementById('temperature')
-var elemHumidity = document.getElementById('humidity')
+var elemHConditions = document.getElementById('conditions')
 var elemWind = document.getElementById('wind')
 elemTemp.innerText = weather.main.temp;
 elemHumidity.innerText = weather.main.humidity;
