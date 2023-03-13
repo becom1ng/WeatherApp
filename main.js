@@ -12,6 +12,7 @@ function doFetch(fetchURL) {
   fetch(fetchURL)
     .then(response => response.json())
     .then(data => displayWeather(data));
+  inputRequest.value = ''
 }
 
 // Update page to display weather
@@ -36,29 +37,35 @@ function fetchClick() {
   const isZip = Number(inputRequest.value)
 
   if (Number.isNaN(isZip)) {
-    prepCityState(inputRequest.value)  // doFetch this whole line?
-    // console.log('This is NOT a number.'); //  NOT A NUMBER
+    prepCityState(inputRequest.value)  //  NOT A NUMBER
   } else {
-    prepZip(isZip)  // doFetch this whole line?
-    // console.log('Else is true.'); // IS A NUMBER
+    prepZip(isZip)  // IS A NUMBER
   }
-
-  // inputRequest.value = ''
 }
 
-function prepZip(zip) {
-  zip.slice(0,5)   // THIS IS WHERE I AM WORKING RIGHT NOW
-  return
+function prepZip(zip) {  
+  if (zip.toString().length < 5) {
+      return  // *** Consider adding error/alert feedback
+    } else {
+      var zipSearch = zip.toString().slice(0,5);
+      var fetchURL = `https://api.openweathermap.org/data/2.5/weather?zip=${zipSearch},us&appid=fd7bb1c5117b8de8488094b4094e66e4&units=imperial`;
+      doFetch(fetchURL);
+    } 
+
+  //zip.slice(0,5)   // THIS IS WHERE I AM WORKING RIGHT NOW
 }
 
-function prepCityState(data) {
-  return
-}
+function prepCityState(city) {
+  if (city.includes(",")) {
+    var data1 = city.replace(",", "");
 
-// For testing purpose via console
-function fetchWeather(zip) {
-  var fetchURL = `https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=fd7bb1c5117b8de8488094b4094e66e4&units=imperial`
-  doFetch(fetchURL);
+  } else {
+    var fetchURL = `https://api.openweathermap.org/data/2.5/weather?q=${city},us&appid=fd7bb1c5117b8de8488094b4094e66e4&units=imperial`
+    console.log(fetchURL);
+    
+    //doFetch(fetchURL);
+    //inputRequest.value = '';
+  }
 }
 
 // Get default location
