@@ -11,7 +11,16 @@ const inputRequest = document.getElementById('weatherRequest');
 function doFetch(fetchURL) {
   fetch(fetchURL)
     .then(response => response.json())
-    .then(data => displayWeather(data));
+    .then(data => displayWeather(data))
+    .catch(function (err) {
+      console.warn('Something went wrong.', err)
+      elemCurrentDisplay.classList.add('text-bg-danger')
+      elemCurrentDisplay.innerText = "Error - Try Again"
+      setTimeout(() => {
+        elemCurrentDisplay.classList.remove('text-bg-danger');
+        elemCurrentDisplay.innerText = "Request Location";
+      }, 4000);
+    });
   inputRequest.value = ''
 }
 
@@ -31,16 +40,16 @@ function displayWeather(weather) {
   elemWind.innerText = Math.round(weather.wind.speed) + " " + getCardinalDirection(weather.wind.deg);
 }
 
+// Search box "OK" clicked
 function fetchClick() {
   if (inputRequest.value.trim() === "") { return }
 
-  const isZip = Number(inputRequest.value)
-
-  if (Number.isNaN(isZip)) {
-    prepCityState(inputRequest.value)  //  NOT A NUMBER
-  } else {
-    prepZip(isZip)  // IS A NUMBER
-  }
+  const isZip = Number(inputRequest.value);
+    if (Number.isNaN(isZip)) {
+      prepCityState(inputRequest.value)  //  NOT A NUMBER
+    } else {
+      prepZip(isZip)  // IS A NUMBER
+    }
 }
 
 function prepZip(zip) {  
@@ -50,21 +59,19 @@ function prepZip(zip) {
       var zipSearch = zip.toString().slice(0,5);
       var fetchURL = `https://api.openweathermap.org/data/2.5/weather?zip=${zipSearch},us&appid=fd7bb1c5117b8de8488094b4094e66e4&units=imperial`;
       doFetch(fetchURL);
-    } 
-
-  //zip.slice(0,5)   // THIS IS WHERE I AM WORKING RIGHT NOW
+    }
 }
 
 function prepCityState(city) {
-  if (city.includes(",")) {
-    var data1 = city.replace(",", "");
-
+  if (city.includes(",") || city.slice(-3).includes(" ")) {
+    var cityRep = city.replace(",", "");
+    var cityState = cityRep.slice(-2);
+    var cityName = cityRep.slice(0,-2).trim();
+    var fetchURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName},${cityState},us&appid=fd7bb1c5117b8de8488094b4094e66e4&units=imperial`
+    doFetch(fetchURL);
   } else {
     var fetchURL = `https://api.openweathermap.org/data/2.5/weather?q=${city},us&appid=fd7bb1c5117b8de8488094b4094e66e4&units=imperial`
-    console.log(fetchURL);
-    
-    //doFetch(fetchURL);
-    //inputRequest.value = '';
+    doFetch(fetchURL);
   }
 }
 
