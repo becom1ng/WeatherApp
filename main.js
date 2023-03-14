@@ -106,4 +106,4 @@ function showError(error) {
   }
 } 
 
-// getLocation(); // Request location of browser
+getLocation(); // Request location of browser
