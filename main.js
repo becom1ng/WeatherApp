@@ -46,7 +46,7 @@ function fetchClick() {
 
   const isZip = Number(inputRequest.value);
     if (Number.isNaN(isZip)) {
-      prepCityState(inputRequest.value)  //  NOT A NUMBER
+      prepCityState(inputRequest.value.trim())  //  NOT A NUMBER
     } else {
       prepZip(isZip)  // IS A NUMBER
     }
